@@ -134,17 +134,24 @@ export class AnimationExceptions{
     
     }
 
-    checkScrollExceptions = (time, frequency, elements, addClass, nameAdded, elementsActive, elementsAddActive) => {
-        this.checkTime(time);
-        this.checkFrequency(time, frequency);
+    checkScrollExceptions = (timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement) => {
+        this.checkTime(timeForAnimation);
+        this.checkFrequency(timeForAnimation, frequencyForAnimation);
 
-        if(elements[0] == undefined)this.setAndPrintMessage('Elements not found!');
+        if(elementsToScroll[0] == undefined)this.setAndPrintMessage('Elements not found!');
+        if(liElements[0] == undefined)this.setAndPrintMessage('Li elements not found!');
+        if(navbarElement == undefined)this.setAndPrintMessage('Navbar element not found!');
+        if(burgerElement == undefined)this.setAndPrintMessage('Burger element not found!');
 
-        if(addClass != null){
-            if(nameAdded === '')this.setAndPrintMessage('Name must have minimum 1 letter!');
-        }
+        if(scrollValue < 0)this.setAndPrintMessage('Scroll value must be bigger than 0!');
 
-        if(!this.checkElementsActive(elementsActive, elementsAddActive))this.setAndPrintMessage('Set true for elementsActive and add elements to ElementsAddActive!');
+        if(typeof scrollValue != 'number')this.setAndPrintMessage('Scroll value must be a number!');
+
+        if(!this.checkElementsActive(addActiveToSection, elementsToScroll))this.setAndPrintMessage('Set true for elementsActive and add elements to ElementsAddActive!');
+
+        if(isLiActive != true && isLiActive != false)this.setAndPrintMessage('"isLiActive" only accepts true or false!');
+        if(isNavbarActive != true && isNavbarActive != false)this.setAndPrintMessage('"isNavbarActive" only accepts true or false!');
+        if(isBurgerActive != true && isBurgerActive != false)this.setAndPrintMessage('"isBurgerActive" only accepts true or false!');
 
 
         if(this.getIsGood() === true)return true; 

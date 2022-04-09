@@ -6,7 +6,9 @@ export class AnimationScroll {
         this.isDeclarednavbarElement = isDeclarednavbarElement;
     }
 
-    static scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addClassToSectionScroll, setNameForClassSectionScroll, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement) {
+    static scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement) {
+
+        
         if (!this.isDeclared) {
             this.isDeclared = true;
             let isMobile;
@@ -53,35 +55,49 @@ export class AnimationScroll {
                 }
                     liElements.forEach((element, index) => {
                     if (index === y - 1) {
-                        element.classList.add('active');
+                        if(isLiActive){
+                            element.classList.add('active');
+                        }
+                        if(addActiveToSection){
+                            elementsToScroll[index].classList.add('active');
+                        }
                     } else {
-                        element.classList.remove('active');
+                        if(isLiActive){
+                            element.classList.remove('active');
+                        }
+                        if(addActiveToSection){
+                            elementsToScroll[index].classList.remove('active');
+                        }
                     }
                 })
             }
 
             function addActiveToNavbar() {
-                
-                if(!isMobile){
-                    if (window.scrollY >= scrollValue) navbarElement.classList.add('active'); 
+
+                if(!isBurgerActive){
+                    if(window.scrollY >= scrollValue)navbarElement.classList.add('active');
                     else navbarElement.classList.remove('active');
+                }else{
+                    if(!isMobile && !navbarElement.classList.contains('active')){
+                        if (window.scrollY >= scrollValue) navbarElement.classList.add('active'); 
+                        else navbarElement.classList.remove('active');
+                    }
+                    else if(isMobile && !navbarElement.classList.contains('burger-nav') && navbarElement.classList.contains('active'))navbarElement.classList.remove('active');
                 }
-                else if(isMobile && !navbarElement.classList.contains('burger-nav'))navbarElement.classList.remove('active');
-                
+                   
             }
 
             function init() {
                 if (!activeAnimation) {
                     checkMobile();
                     checkSection();
-                    if (isLiActive) {
-                        checkLi();
-                    }
-                }
-                if(isMobile && isBurgerActive)addBurger();
-                else if(!isMobile && isBurgerActive)removeBurger();
+                    checkLi();
 
-                addActiveToNavbar();
+                    if(isMobile && isBurgerActive)addBurger();
+                    else if(!isMobile && isBurgerActive)removeBurger();
+                    
+                    if(isNavbarActive)addActiveToNavbar();
+                }  
             }
 
             function checkSection() {

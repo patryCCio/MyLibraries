@@ -36,17 +36,19 @@ export class Animation {
     }
 
     //SCROLL
-    static scroll = (type, timeForAnimation, frequencyForAnimation, elementsToScroll, addClassToSectionScroll = false, setNameForClassSectionScroll = null, isLiActive = false, liElements = null, isNavbarActive = false, navbarElement = null, scrollValue = 100, isBurgerActive = false, burgerElement = null) => {
-
+    static scroll = (type, timeForAnimation, frequencyForAnimation, addActiveToSection = false, isLiActive = false, isNavbarActive = false, scrollValue = 100, isBurgerActive = false) => {
+        const liElements = document.querySelectorAll('[data-hrefps]');
+        const navbarElement = document.querySelector('[data-navbarps]');
+        const burgerElement = document.querySelector('[data-burgerps]');
+        const elementsToScroll = document.querySelectorAll('[data-hrefposps]');
         const animateExceptions = new AnimationExceptions(true);
-
-        const isGood = animateExceptions.checkScrollExceptions(timeForAnimation, frequencyForAnimation, elementsToScroll, addClassToSectionScroll, setNameForClassSectionScroll, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
+        const isGood = animateExceptions.checkScrollExceptions(timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
 
         if(isGood){
             if(type === 'linear'){
-                AnimationScroll.scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addClassToSectionScroll, setNameForClassSectionScroll, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
+                AnimationScroll.scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
             }else if(type === 'ease'){
-                AnimationScroll.scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addClassToSectionScroll, setNameForClassSectionScroll, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
+                AnimationScroll.scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement);
             }
             
         }else return null;
