@@ -133,27 +133,20 @@ export class AnimationExceptions{
     }
 
     checkScrollExceptions = (time, frequency, elements, addClass, nameAdded, elementsActive, elementsAddActive) => {
-        // if(!this.correctTime(time))this.setAndPrintMessage('Wrong value of time!');
+        this.checkTime(time);
+        this.checkFrequency(time, frequency);
 
-        // if(!this.correctFrequency(time, frequency))this.setAndPrintMessage('Wrong value of frequency!');
+        if(elements[0] == undefined)this.setAndPrintMessage('Elements not found!');
 
-        // if(!this.correctAddClass(nameAdded, addClass))this.setAndPrintMessage('Only string for class!');
+        if(addClass != null){
+            if(nameAdded === '')this.setAndPrintMessage('Name must have minimum 1 letter!');
+        }
 
-        // if(elements[0] == undefined)this.setAndPrintMessage('Elements not found!');
-
-        // if(addClass != null){
-        //     if(nameAdded === '')this.setAndPrintMessage('Name must have minimum 1 letter!');
-        // }
-
-        // if(!this.checkElementsActive(elementsActive, elementsAddActive))this.setAndPrintMessage('Set true for elementsActive and add elements to ElementsAddActive!');
+        if(!this.checkElementsActive(elementsActive, elementsAddActive))this.setAndPrintMessage('Set true for elementsActive and add elements to ElementsAddActive!');
 
 
-        // if(this.getIsGood() === true)return true; 
-        // else return false;
-    }
-
-    checkNavbarExceptions = (elements, navbarActive, navbar, liActive = false, liElements, scrollValue, burgerActive = false, burger = null) =>{
-
+        if(this.getIsGood() === true)return true; 
+        else return false;
     }
 
     choiceAnimation = function(type, time, frequency, elements, attribute, value, from, to, hoverEffect, unitValue){
