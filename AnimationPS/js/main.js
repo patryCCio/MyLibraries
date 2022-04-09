@@ -1,6 +1,8 @@
 import { AnimationExceptions } from "./AnimationExceptions.js";
 import { AnimationScroll } from "./AnimationScroll/AnimationScroll.js";
 
+//github.com/patryCCio
+
 export class Animation {
 
 

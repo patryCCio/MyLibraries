@@ -1,3 +1,5 @@
+//github.com/patryCCio
+
 export class AnimationData{
     constructor(time, frequency, elements, attribute, from, to, value = null, hoverEffect = false, unitValue = null){
         this.time = time;

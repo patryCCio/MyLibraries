@@ -1,3 +1,5 @@
+//github.com/patryCCio
+
 export class AnimationLinear {
     constructor(type, time, frequency, elements, attribute, value, from, to, hoverEffect, unitValue) {
         this.isActiveAnimation = false;

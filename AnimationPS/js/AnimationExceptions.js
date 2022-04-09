@@ -1,6 +1,8 @@
 import { AnimationLinear } from "./AnimationElement/AnimationLinear.js";
 import { AnimationData } from "./AnimationData.js";
 
+//github.com/patryCCio
+
 export class AnimationExceptions{
     constructor(isGood){
         this._isGood = isGood;
