@@ -8,7 +8,7 @@ export class AnimationScroll {
 
     static scroll(type, timeForAnimation, frequencyForAnimation, elementsToScroll, addActiveToSection, isLiActive, liElements, isNavbarActive, navbarElement, scrollValue, isBurgerActive, burgerElement) {
 
-        
+
         if (!this.isDeclared) {
             this.isDeclared = true;
             let isMobile;
@@ -17,10 +17,10 @@ export class AnimationScroll {
             let part = timeForAnimation / frequencyForAnimation;
             let changeForElement;
 
-            if(isBurgerActive){
+            if (isBurgerActive) {
                 const spanWrapper = document.createElement('div');
-                spanWrapper.classList='burger-span-wrapper';
-                for(let x=0; x<3; x++){
+                spanWrapper.classList = 'burger-span-wrapper';
+                for (let x = 0; x < 3; x++) {
                     const spanEl = document.createElement('span');
                     spanEl.dataset.burgerspanps = x;
                     spanWrapper.appendChild(spanEl);
@@ -28,13 +28,13 @@ export class AnimationScroll {
                 burgerElement.appendChild(spanWrapper);
             }
 
-            function deletePreload(){
+            function deletePreload() {
                 this.document.body.classList.remove('preload');
             }
-            function addPreload(){
+            function addPreload() {
                 this.document.body.classList.add('preload');
                 setTimeout(deletePreload, 300);
-                
+
             }
             window.addEventListener('load', addPreload);
 
@@ -53,38 +53,43 @@ export class AnimationScroll {
                         y++;
                     }
                 }
-                    liElements.forEach((element, index) => {
+
+                liElements.forEach((element, index) => {
+                    if (index === sizeSection.length) return null;
                     if (index === y - 1) {
-                        if(isLiActive){
+                        if (isLiActive) {
                             element.classList.add('active');
                         }
-                        if(addActiveToSection){
+                        if (addActiveToSection) {
                             elementsToScroll[index].classList.add('active');
                         }
                     } else {
-                        if(isLiActive){
+
+                        if (isLiActive) {
                             element.classList.remove('active');
                         }
-                        if(addActiveToSection){
+                        if (addActiveToSection) {
                             elementsToScroll[index].classList.remove('active');
                         }
+
+
                     }
                 })
             }
 
             function addActiveToNavbar() {
 
-                if(!isBurgerActive){
-                    if(window.scrollY >= scrollValue)navbarElement.classList.add('active');
+                if (!isBurgerActive) {
+                    if (window.scrollY >= scrollValue) navbarElement.classList.add('active');
                     else navbarElement.classList.remove('active');
-                }else{
-                    if(!isMobile && !navbarElement.classList.contains('active')){
-                        if (window.scrollY >= scrollValue) navbarElement.classList.add('active'); 
+                } else {
+                    if (!isMobile && !navbarElement.classList.contains('active')) {
+                        if (window.scrollY >= scrollValue) navbarElement.classList.add('active');
                         else navbarElement.classList.remove('active');
                     }
-                    else if(isMobile && !navbarElement.classList.contains('burger-nav') && navbarElement.classList.contains('active'))navbarElement.classList.remove('active');
+                    else if (isMobile && !navbarElement.classList.contains('burger-nav') && navbarElement.classList.contains('active')) navbarElement.classList.remove('active');
                 }
-                   
+
             }
 
             function init() {
@@ -93,11 +98,11 @@ export class AnimationScroll {
                     checkSection();
                     checkLi();
 
-                    if(isMobile && isBurgerActive)addBurger();
-                    else if(!isMobile && isBurgerActive)removeBurger();
-                    
-                    if(isNavbarActive)addActiveToNavbar();
-                }  
+                    if (isMobile && isBurgerActive) addBurger();
+                    else if (!isMobile && isBurgerActive) removeBurger();
+
+                    if (isNavbarActive) addActiveToNavbar();
+                }
             }
 
             function checkSection() {
@@ -115,13 +120,17 @@ export class AnimationScroll {
 
                         const text = element.dataset.hrefps;
                         let from = window.scrollY;
-                        let to = sizeSection[index];
+                        let to;
+                        elementsToScroll.forEach((element, index) => {
+                            if (element.dataset.hrefposps === text) to = sizeSection[index];
+                        })
+
 
                         if (from === to) return null;
 
                         if (activeAnimation) return console.log('animacja w toku!');
 
-                        if (isMobile){
+                        if (isMobile) {
                             burgerElement.classList.remove('active');
                             navbarElement.classList.remove('active');
                         }
@@ -214,18 +223,18 @@ export class AnimationScroll {
                 return changeForElement;
             }
 
-            function addBurger(){
+            function addBurger() {
                 navbarElement.classList.add('burger-nav');
-                if(!burgerElement.classList.contains('active'))navbarElement.classList.remove('active');
+                if (!burgerElement.classList.contains('active')) navbarElement.classList.remove('active');
             }
 
-            function removeBurger(){
+            function removeBurger() {
                 navbarElement.classList.remove('active');
                 navbarElement.classList.remove('burger-nav');
                 burgerElement.classList.remove('active');
             }
 
-            if(isBurgerActive) burgerElement.addEventListener('click', function () {
+            if (isBurgerActive) burgerElement.addEventListener('click', function () {
                 burgerElement.classList.toggle('active');
                 navbarElement.classList.toggle('active');
             });
